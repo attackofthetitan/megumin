@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "%": "megumin:staff_ball",
+    "#": "minecraft:blaze_powder",
+    "$": "minecraft:blaze_rod",
+    "&": "minecraft:stick"
+  },
+  "pattern": [
+    "#%#",
+    " $ ",
+    " & "
+  ],
+  "result": {
+    "count": 1,
+    "id": "megumin:megumin_staff"
+  }
+}

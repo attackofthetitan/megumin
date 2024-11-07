@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "megumin",
+	"version": "${version}",
+	"name": "Megumin",
+	"description": "Adds Megumin's staff from the Anime/Light Novel Konosuba. EXPLOSION!!!",
+	"authors": [
+		"6___"
+	],
+	"contact": {
+		"sources": "https://github.com/sixunderscore/megumin"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/megumin/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.sixunderscore.megumin.Megumin"
+		],
+		"client": [
+			"net.sixunderscore.megumin.MeguminClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.21.3",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
