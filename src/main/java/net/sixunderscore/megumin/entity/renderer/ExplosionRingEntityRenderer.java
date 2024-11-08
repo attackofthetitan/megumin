@@ -10,7 +10,7 @@ import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import net.sixunderscore.megumin.Megumin;
 import net.sixunderscore.megumin.entity.custom.ExplosionRingEntity;
-import net.sixunderscore.megumin.entity.renderStates.ExplosionRingEntityRenderState;
+import net.sixunderscore.megumin.entity.renderstates.ExplosionRingEntityRenderState;
 import org.joml.Quaternionf;
 
 @Environment(EnvType.CLIENT)

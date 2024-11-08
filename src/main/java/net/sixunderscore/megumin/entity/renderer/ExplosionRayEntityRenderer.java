@@ -8,7 +8,7 @@ import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import net.sixunderscore.megumin.Megumin;
 import net.sixunderscore.megumin.entity.custom.ExplosionRayEntity;
-import net.sixunderscore.megumin.entity.renderStates.ExplosionRayEntityRenderState;
+import net.sixunderscore.megumin.entity.renderstates.ExplosionRayEntityRenderState;
 import org.joml.Quaternionf;
 
 public class ExplosionRayEntityRenderer extends EntityRenderer<ExplosionRayEntity, ExplosionRayEntityRenderState> {
