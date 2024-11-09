@@ -27,7 +27,7 @@ public class ExplosionRayEntity extends Entity {
     @Override
     public void tick() {
         if (this.size >= -100) {
-            this.size -= 1;
+            --this.size;
         }
     }
 
