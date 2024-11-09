@@ -72,7 +72,7 @@ public class ExplosionManagerEntity extends Entity {
                 break;
             case 110:
                 if (!this.getWorld().isClient && user != null) {
-                    for (int i = 0; i < 20; ++i) {
+                    for (int i = 0; i <= 20; ++i) {
                         this.getWorld().createExplosion(user,
                                 this.getX() + random.nextGaussian() * 10,
                                 this.getY(),
