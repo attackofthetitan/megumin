@@ -49,19 +49,19 @@ public class ExplosionManagerEntity extends Entity {
     public void tick() {
         switch (this.dataTracker.get(TIMER)) {
             case 0:
-                spawnRing(70, 70);
+                spawnRing(80, 70);
                 break;
             case 10:
-                spawnRing(20, 60);
+                spawnRing(30, 60);
                 break;
             case 20:
-                spawnRing(30, 50);
+                spawnRing(40, 50);
                 break;
             case 30:
-                spawnRing(30, 40);
+                spawnRing(40, 40);
                 break;
             case 40:
-                spawnRing(20, 30);
+                spawnRing(30, 30);
                 break;
             case 105:
                 //spawn ray
@@ -72,13 +72,16 @@ public class ExplosionManagerEntity extends Entity {
                 break;
             case 110:
                 if (!this.getWorld().isClient && user != null) {
-                    for (int i = 0; i <= 20; ++i) {
+                    int explosionDepth = 15;
+
+                    for (int i = 0; i <= 25; ++i) {
                         this.getWorld().createExplosion(user,
-                                this.getX() + random.nextGaussian() * 10,
-                                this.getY(),
-                                this.getZ() + random.nextGaussian() * 10,
+                                this.getX() + random.nextGaussian() * i,
+                                this.getY() - explosionDepth,
+                                this.getZ() + random.nextGaussian() * i,
                                 20, false, World.ExplosionSourceType.MOB
                         );
+                        --explosionDepth;
                     }
                     if (!user.getAbilities().creativeMode) {
                         user.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_DAMAGE, 1, 1));

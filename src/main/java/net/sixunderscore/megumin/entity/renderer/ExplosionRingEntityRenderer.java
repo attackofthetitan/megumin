@@ -59,8 +59,8 @@ public class ExplosionRingEntityRenderer extends EntityRenderer<ExplosionRingEnt
         super.updateRenderState(entity, state, tickDelta);
         int maxSize = entity.getMaxSize();
 
-        if (maxSize < 70) state.size = Math.min((entity.getSize() + tickDelta) * 3, maxSize);
-        else state.size = Math.min((entity.getSize() + tickDelta) * 5, maxSize);
+        if (maxSize < 70) state.size = Math.min((entity.getSize() + tickDelta) * 3.5f, maxSize);
+        else state.size = Math.min((entity.getSize() + tickDelta) * 5.5f, maxSize);
 
         state.rotation = (entity.age + tickDelta) * 0.2f;
     }
