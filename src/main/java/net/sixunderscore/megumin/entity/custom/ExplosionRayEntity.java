@@ -9,7 +9,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
 public class ExplosionRayEntity extends Entity {
-    public int size;
+    public int age;
 
     public ExplosionRayEntity(EntityType<?> type, World world) {
         super(type, world);
@@ -26,9 +26,9 @@ public class ExplosionRayEntity extends Entity {
 
     @Override
     public void tick() {
-        if (this.size >= -100) {
-            --this.size;
-        }
+        if (this.age >= 10) this.discard();
+        ++this.age;
+        super.tick();
     }
 
     @Override

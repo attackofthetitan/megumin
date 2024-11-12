@@ -40,7 +40,7 @@ public class MeguminStaffItem extends Item {
                 if (!world.isClient) {
                     ExplosionManagerEntity explosionManager = new ExplosionManagerEntity(ModEntities.EXPLOSION_MANAGER, world);
                     explosionManager.setUser(user);
-                    explosionManager.setPosition(hitPos.x, hitPos.y, hitPos.z);
+                    explosionManager.setPosition(hitPos);
                     world.spawnEntity(explosionManager);
 
                     if (!user.getAbilities().creativeMode) {

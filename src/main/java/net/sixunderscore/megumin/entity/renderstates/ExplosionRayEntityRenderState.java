@@ -6,5 +6,5 @@ import net.minecraft.client.render.entity.state.EntityRenderState;
 
 @Environment(EnvType.CLIENT)
 public class ExplosionRayEntityRenderState extends EntityRenderState {
-    public float size;
+    public float lowerSize;
 }

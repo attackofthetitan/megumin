@@ -6,6 +6,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.sixunderscore.megumin.Megumin;
 import net.sixunderscore.megumin.entity.custom.ExplosionRayEntity;
 import net.sixunderscore.megumin.entity.renderstates.ExplosionRayEntityRenderState;
@@ -34,7 +35,7 @@ public class ExplosionRayEntityRenderer extends EntityRenderer<ExplosionRayEntit
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(LAYER);
 
         //render vertices
-        float size = state.size;
+        float size = state.lowerSize;
         produceVertex(vertexConsumer, entry, -1.5F, size, 0, 1);
         produceVertex(vertexConsumer, entry, 1.5F, size, 1, 1);
         produceVertex(vertexConsumer, entry, 1.5F, 0, 1, 0);
@@ -56,7 +57,10 @@ public class ExplosionRayEntityRenderer extends EntityRenderer<ExplosionRayEntit
     @Override
     public void updateRenderState(ExplosionRayEntity entity, ExplosionRayEntityRenderState state, float tickDelta) {
         super.updateRenderState(entity, state, tickDelta);
-        state.size = Math.max((entity.size - tickDelta) * 10, -100);
+        float elapsedTime = entity.age + tickDelta;
+        float t = Math.min(elapsedTime / 10, 1.0f);
+
+        state.lowerSize = MathHelper.lerp(t, 0, -100);
     }
 
     @Override

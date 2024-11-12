@@ -8,6 +8,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.sixunderscore.megumin.Megumin;
 import net.sixunderscore.megumin.entity.custom.ExplosionRingEntity;
 import net.sixunderscore.megumin.entity.renderstates.ExplosionRingEntityRenderState;
@@ -58,9 +59,24 @@ public class ExplosionRingEntityRenderer extends EntityRenderer<ExplosionRingEnt
     public void updateRenderState(ExplosionRingEntity entity, ExplosionRingEntityRenderState state, float tickDelta) {
         super.updateRenderState(entity, state, tickDelta);
         int maxSize = entity.getMaxSize();
+        int entityLifeSpan = entity.getLifeSpan();
+        int animationTicks = entity.ANIMATION_TICKS;
 
-        if (maxSize < 70) state.size = Math.min((entity.getSize() + tickDelta) * 3.5f, maxSize);
-        else state.size = Math.min((entity.getSize() + tickDelta) * 5.5f, maxSize);
+        if (entity.age < animationTicks) {
+            //growing phase
+            float elapsedTime = (entity.age + tickDelta); //time since growth started
+            float t = Math.min(elapsedTime / animationTicks, 1.0f);
+
+            state.size = MathHelper.lerp(t, 0, maxSize);
+        } else if (entity.age > entityLifeSpan - animationTicks) {
+            //shrinking phase
+            float elapsedTime = (entity.age + tickDelta) - (entityLifeSpan - animationTicks); //time since shrink started
+            float t = Math.min(elapsedTime / animationTicks, 1.0f);
+
+            state.size = MathHelper.lerp(t, maxSize, 0);
+        } else {
+            state.size = maxSize;
+        }
 
         state.rotation = (entity.age + tickDelta) * 0.2f;
     }
