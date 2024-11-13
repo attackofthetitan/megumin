@@ -46,15 +46,16 @@ public class ExplosionManagerEntity extends Entity {
         if (user != null) {
             switch (this.dataTracker.get(TIMER)) {
                 case 0 -> {
-                    spawnRing(80, 80, 115);
+                    spawnRing(80, 90, 115);
                     spawnPlayerRing();
                 }
-                case 10 -> spawnRing(30, 70,105);
-                case 20 -> spawnRing(40, 60, 95);
-                case 30 -> spawnRing(50, 50, 85);
-                case 40 -> spawnRing(40, 40,75);
-                case 50 -> spawnRing(30, 30,65);
+                case 10 -> spawnRing(30, 80,105);
+                case 20 -> spawnRing(40, 70, 95);
+                case 30 -> spawnRing(50, 60, 85);
+                case 40 -> spawnRing(40, 50,75);
+                case 50 -> spawnRing(30, 40,65);
                 case 105 -> spawnRay();
+                case 110 -> spawnExplosionCircle();
                 case 115 -> {
                     if (!this.getWorld().isClient) {
                         spawnExplosions();
@@ -87,12 +88,18 @@ public class ExplosionManagerEntity extends Entity {
 
     private void spawnRay() {
         ExplosionRayEntity ray = new ExplosionRayEntity(ModEntities.EXPLOSION_RAY, this.getWorld());
-        ray.setPosition(this.getX(), this.getY() + 80, this.getZ());
+        ray.setPosition(this.getX(), this.getY() + 90, this.getZ());
         this.getWorld().spawnEntity(ray);
     }
 
+    private void spawnExplosionCircle() {
+        ExplosionCircleEntity circle = new ExplosionCircleEntity(ModEntities.EXPLOSION_CIRCLE, this.getWorld());
+        circle.setPosition(this.getX(), this.getY(), this.getZ());
+        this.getWorld().spawnEntity(circle);
+    }
+
     private void spawnExplosions() {
-        float explosionDepth = 15;
+        float explosionDepth = 10;
         float explosionRadius = 1;
 
         for (int i = 0; i <= 25; ++i) {

@@ -10,6 +10,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.sixunderscore.megumin.entity.custom.*;
+import net.sixunderscore.megumin.entity.renderer.ExplosionCircleEntityRenderer;
 import net.sixunderscore.megumin.entity.renderer.ExplosionManagerEntityRenderer;
 import net.sixunderscore.megumin.entity.renderer.ExplosionRayEntityRenderer;
 import net.sixunderscore.megumin.entity.renderer.ExplosionRingEntityRenderer;
@@ -17,6 +18,7 @@ import net.sixunderscore.megumin.entity.renderer.ExplosionRingEntityRenderer;
 public class ModEntities {
     public static final EntityType<ExplosionRingEntity> EXPLOSION_RING = register("explosion_ring", EntityType.Builder.create(ExplosionRingEntity::new, SpawnGroup.MISC).dropsNothing().dimensions(0.5F, 0.5F));
     public static final EntityType<ExplosionRayEntity> EXPLOSION_RAY = register("explosion_ray", EntityType.Builder.create(ExplosionRayEntity::new, SpawnGroup.MISC).dropsNothing().dimensions(0.5F, 0.5F));
+    public static final EntityType<ExplosionCircleEntity> EXPLOSION_CIRCLE = register("explosion_circle", EntityType.Builder.create(ExplosionCircleEntity::new, SpawnGroup.MISC).dropsNothing().dimensions(0.5F, 0.5F));
     public static final EntityType<ExplosionManagerEntity> EXPLOSION_MANAGER = register("explosion_manager", EntityType.Builder.create(ExplosionManagerEntity::new, SpawnGroup.MISC).dropsNothing().dimensions(0.5F, 0.5F));
 
     private static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> type) {
@@ -30,6 +32,7 @@ public class ModEntities {
     public static void registerRenderers() {
         EntityRendererRegistry.register(EXPLOSION_RING, ExplosionRingEntityRenderer::new);
         EntityRendererRegistry.register(EXPLOSION_RAY, ExplosionRayEntityRenderer::new);
+        EntityRendererRegistry.register(EXPLOSION_CIRCLE, ExplosionCircleEntityRenderer::new);
         EntityRendererRegistry.register(EXPLOSION_MANAGER, ExplosionManagerEntityRenderer::new);
     }
 }

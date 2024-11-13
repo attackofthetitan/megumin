@@ -8,15 +8,14 @@ import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.sixunderscore.megumin.Megumin;
-import net.sixunderscore.megumin.entity.custom.ExplosionRayEntity;
+import net.sixunderscore.megumin.entity.custom.ExplosionCircleEntity;
 import net.sixunderscore.megumin.entity.renderstates.SimpleExplosionVisualRenderState;
-import org.joml.Quaternionf;
 
-public class ExplosionRayEntityRenderer extends EntityRenderer<ExplosionRayEntity, SimpleExplosionVisualRenderState> {
-    private static final Identifier TEXTURE = Identifier.of(Megumin.MOD_ID, "textures/entity/explosion_ray.png");
+public class ExplosionCircleEntityRenderer extends EntityRenderer<ExplosionCircleEntity, SimpleExplosionVisualRenderState> {
+    private static final Identifier TEXTURE = Identifier.of(Megumin.MOD_ID, "textures/entity/explosion_circle.png");
     private static final RenderLayer LAYER = RenderLayer.getEntityTranslucent(TEXTURE);
 
-    public ExplosionRayEntityRenderer(EntityRendererFactory.Context ctx) {
+    public ExplosionCircleEntityRenderer(EntityRendererFactory.Context ctx) {
         super(ctx);
     }
 
@@ -24,22 +23,20 @@ public class ExplosionRayEntityRenderer extends EntityRenderer<ExplosionRayEntit
     public void render(SimpleExplosionVisualRenderState state, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
         matrixStack.push();
 
-        //multiply y-axis by player's position
-        Quaternionf playerQuaternion = this.dispatcher.getRotation();
-        playerQuaternion.x = 0;
-        playerQuaternion.z = 0;
-        matrixStack.multiply(playerQuaternion);
+        //multiply rotation by player's position and scale to size
+        float size = state.size;
+        matrixStack.scale(size, size, size);
+        matrixStack.multiply(this.dispatcher.getRotation());
 
         //prepare to render the vertices
         MatrixStack.Entry entry = matrixStack.peek();
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(LAYER);
 
         //render vertices
-        float size = state.size;
-        produceVertex(vertexConsumer, entry, -1.5F, size, 0, 1);
-        produceVertex(vertexConsumer, entry, 1.5F, size, 1, 1);
-        produceVertex(vertexConsumer, entry, 1.5F, 0, 1, 0);
-        produceVertex(vertexConsumer, entry, -1.5F, 0, 0, 0);
+        produceVertex(vertexConsumer, entry, -0.5F, -0.5F, 0, 1);
+        produceVertex(vertexConsumer, entry, -0.5F, 0.5F,1, 1);
+        produceVertex(vertexConsumer, entry, 0.5F, 0.5F, 1, 0);
+        produceVertex(vertexConsumer, entry, 0.5F, -0.5F,0, 0);
 
         matrixStack.pop();
         super.render(state, matrixStack, vertexConsumerProvider, light);
@@ -55,16 +52,16 @@ public class ExplosionRayEntityRenderer extends EntityRenderer<ExplosionRayEntit
     }
 
     @Override
-    public void updateRenderState(ExplosionRayEntity entity, SimpleExplosionVisualRenderState state, float tickDelta) {
+    public void updateRenderState(ExplosionCircleEntity entity, SimpleExplosionVisualRenderState state, float tickDelta) {
         super.updateRenderState(entity, state, tickDelta);
         float elapsedTime = entity.age + tickDelta;
         float t = Math.min(elapsedTime / entity.ANIMATION_TICKS, 1.0f);
 
-        state.size = MathHelper.lerp(t, 0, -100);
+        state.size = MathHelper.lerp(t, 0, 90);
     }
 
     @Override
-    public boolean shouldRender(ExplosionRayEntity entity, Frustum frustum, double x, double y, double z) {
+    public boolean shouldRender(ExplosionCircleEntity entity, Frustum frustum, double x, double y, double z) {
         //checking if entity is closer to camera than 850 blocks
         if (entity.squaredDistanceTo(x, y, z) <= 722500) {
             return true;
