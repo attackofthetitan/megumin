@@ -92,7 +92,7 @@ public class ExplosionManagerEntity extends Entity {
     }
 
     private void spawnExplosions() {
-        int explosionDepth = 15;
+        float explosionDepth = 15;
         float explosionRadius = 1;
 
         for (int i = 0; i <= 25; ++i) {
@@ -102,8 +102,9 @@ public class ExplosionManagerEntity extends Entity {
                     this.getZ() + random.nextGaussian() * explosionRadius,
                     20, false, World.ExplosionSourceType.MOB
             );
+
+            if (explosionDepth > 0) explosionDepth -= 0.5f;
             explosionRadius += 0.5f;
-            if (explosionDepth > 0) --explosionDepth;
         }
     }
 
