@@ -81,7 +81,7 @@ public class ExplosionManagerEntity extends Entity {
         ExplosionRingEntity ring = new ExplosionRingEntity(ModEntities.EXPLOSION_RING, this.getWorld());
         ring.setUser(user, 0.3f);
         ring.setLifeSpan(115);
-        ring.setPosition(user.getX(), user.getY() + (float) 0.3, user.getZ());
+        ring.setPosition(user.getX(), user.getY() + 0.3f, user.getZ());
         this.getWorld().spawnEntity(ring);
     }
 
@@ -93,14 +93,16 @@ public class ExplosionManagerEntity extends Entity {
 
     private void spawnExplosions() {
         int explosionDepth = 15;
+        float explosionRadius = 1;
 
         for (int i = 0; i <= 25; ++i) {
             this.getWorld().createExplosion(user,
-                    this.getX() + random.nextGaussian() * i,
+                    this.getX() + random.nextGaussian() * explosionRadius,
                     this.getY() - explosionDepth,
-                    this.getZ() + random.nextGaussian() * i,
+                    this.getZ() + random.nextGaussian() * explosionRadius,
                     20, false, World.ExplosionSourceType.MOB
             );
+            explosionRadius += 0.5f;
             if (explosionDepth > 0) --explosionDepth;
         }
     }
@@ -110,7 +112,7 @@ public class ExplosionManagerEntity extends Entity {
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_DAMAGE, 1, 1));
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 400, 1));
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 1200, 2));
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 1200, 2));
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 1200, 3));
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 1200, 2));
         }
     }

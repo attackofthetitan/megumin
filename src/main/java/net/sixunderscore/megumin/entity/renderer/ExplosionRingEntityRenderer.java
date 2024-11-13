@@ -58,22 +58,22 @@ public class ExplosionRingEntityRenderer extends EntityRenderer<ExplosionRingEnt
     @Override
     public void updateRenderState(ExplosionRingEntity entity, ExplosionRingEntityRenderState state, float tickDelta) {
         super.updateRenderState(entity, state, tickDelta);
-        int maxSize = entity.getMaxSize();
-        int entityLifeSpan = entity.getLifeSpan();
-        int animationTicks = entity.ANIMATION_TICKS;
+        float maxSize = entity.getMaxSize();
+        float entityLifeSpan = entity.getLifeSpan();
+        float animationTicks = (float) entity.ANIMATION_TICKS;
 
         if (entity.age < animationTicks) {
             //growing phase
             float elapsedTime = (entity.age + tickDelta); //time since growth started
-            float t = Math.min(elapsedTime / animationTicks, 1.0f);
+            float delta = Math.min(elapsedTime / animationTicks, 1.0f);
 
-            state.size = MathHelper.lerp(t, 0, maxSize);
+            state.size = MathHelper.lerp(delta, 0, maxSize);
         } else if (entity.age > entityLifeSpan - animationTicks) {
             //shrinking phase
             float elapsedTime = (entity.age + tickDelta) - (entityLifeSpan - animationTicks); //time since shrink started
-            float t = Math.min(elapsedTime / animationTicks, 1.0f);
+            float delta = Math.min(elapsedTime / animationTicks, 1.0f);
 
-            state.size = MathHelper.lerp(t, maxSize, 0);
+            state.size = MathHelper.lerp(delta, maxSize, 0);
         } else {
             state.size = maxSize;
         }

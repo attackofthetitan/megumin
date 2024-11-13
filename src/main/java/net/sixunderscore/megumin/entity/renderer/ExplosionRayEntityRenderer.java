@@ -58,7 +58,7 @@ public class ExplosionRayEntityRenderer extends EntityRenderer<ExplosionRayEntit
     public void updateRenderState(ExplosionRayEntity entity, ExplosionRayEntityRenderState state, float tickDelta) {
         super.updateRenderState(entity, state, tickDelta);
         float elapsedTime = entity.age + tickDelta;
-        float t = Math.min(elapsedTime / 10, 1.0f);
+        float t = Math.min(elapsedTime / entity.ANIMATION_TICKS, 1.0f);
 
         state.lowerSize = MathHelper.lerp(t, 0, -100);
     }

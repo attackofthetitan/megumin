@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 
 public class ExplosionRayEntity extends Entity {
     public int age;
+    public final int ANIMATION_TICKS = 7;
 
     public ExplosionRayEntity(EntityType<?> type, World world) {
         super(type, world);
@@ -26,7 +27,7 @@ public class ExplosionRayEntity extends Entity {
 
     @Override
     public void tick() {
-        if (this.age >= 10) this.discard();
+        if (this.age >= ANIMATION_TICKS) this.discard();
         ++this.age;
         super.tick();
     }

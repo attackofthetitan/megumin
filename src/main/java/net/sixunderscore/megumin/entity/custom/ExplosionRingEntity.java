@@ -12,9 +12,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
 public class ExplosionRingEntity extends Entity {
-    private static final TrackedData<Integer> MAX_SIZE = DataTracker.registerData(ExplosionRingEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final TrackedData<Integer> LIFESPAN = DataTracker.registerData(ExplosionRingEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    public final int ANIMATION_TICKS = 10;
+    private static final TrackedData<Float> MAX_SIZE = DataTracker.registerData(ExplosionRingEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    private static final TrackedData<Float> LIFESPAN = DataTracker.registerData(ExplosionRingEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    public final int ANIMATION_TICKS = 7;
     public int age;
     private PlayerEntity user;
     private float userYOffset;
@@ -25,32 +25,30 @@ public class ExplosionRingEntity extends Entity {
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
-        builder.add(MAX_SIZE, 5);
-        builder.add(LIFESPAN, 100);
+        builder.add(MAX_SIZE, 5.0f);
+        builder.add(LIFESPAN, 100.0f);
     }
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.putInt("MaxSize", this.dataTracker.get(MAX_SIZE));
-        nbt.putInt("LifeSpan", this.dataTracker.get(LIFESPAN));
+        nbt.putFloat("MaxSize", this.dataTracker.get(MAX_SIZE));
+        nbt.putFloat("LifeSpan", this.dataTracker.get(LIFESPAN));
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
-        this.dataTracker.set(MAX_SIZE, nbt.getInt("MaxSize"));
-        this.dataTracker.set(LIFESPAN, nbt.getInt("LifeSpan"));
+        this.dataTracker.set(MAX_SIZE, nbt.getFloat("MaxSize"));
+        this.dataTracker.set(LIFESPAN, nbt.getFloat("LifeSpan"));
     }
 
     @Override
     public void tick() {
-        int lifeSpan = this.dataTracker.get(LIFESPAN);
-
         //if the entity has reached the end of its lifespan, discard it
-        if (this.age >= lifeSpan) {
+        if (this.age >= this.dataTracker.get(LIFESPAN)) {
             this.discard();
         }
 
-        //move the ring if it is the player ring
+        //move the ring if it is the player's ring
         if (user != null) {
             this.setPosition(user.getX(), user.getY() + userYOffset, user.getZ());
         }
@@ -59,19 +57,19 @@ public class ExplosionRingEntity extends Entity {
         super.tick();
     }
 
-    public int getMaxSize() {
+    public float getMaxSize() {
         return this.dataTracker.get(MAX_SIZE);
     }
 
-    public void setMaxSize(int size) {
+    public void setMaxSize(float size) {
         this.dataTracker.set(MAX_SIZE, size);
     }
 
-    public int getLifeSpan() {
+    public float getLifeSpan() {
         return this.dataTracker.get(LIFESPAN);
     }
 
-    public void setLifeSpan(int ticks) {
+    public void setLifeSpan(float ticks) {
         this.dataTracker.set(LIFESPAN, ticks);
     }
 
