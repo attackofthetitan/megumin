@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 public class ExplosionCircleEntity extends Entity {
     public int age;
-    public final int ANIMATION_TICKS = 10;
+    public final int ANIMATION_TICKS = 13;
 
     public ExplosionCircleEntity(EntityType<?> type, World world) {
         super(type, world);

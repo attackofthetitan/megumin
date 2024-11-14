@@ -46,23 +46,23 @@ public class ExplosionManagerEntity extends Entity {
         if (user != null) {
             switch (this.dataTracker.get(TIMER)) {
                 case 0 -> {
-                    spawnRing(80, 90, 115);
+                    spawnRing(80, 90, 125);
                     spawnPlayerRing();
                 }
-                case 10 -> spawnRing(30, 80,105);
-                case 20 -> spawnRing(40, 70, 95);
-                case 30 -> spawnRing(50, 60, 85);
-                case 40 -> spawnRing(40, 50,75);
-                case 50 -> spawnRing(30, 40,65);
-                case 105 -> spawnRay();
-                case 110 -> spawnExplosionCircle();
-                case 115 -> {
+                case 10 -> spawnRing(30, 80,115);
+                case 20 -> spawnRing(40, 70, 105);
+                case 30 -> spawnRing(50, 60, 95);
+                case 40 -> spawnRing(40, 50,85);
+                case 50 -> spawnRing(30, 40,75);
+                case 115 -> spawnRay();
+                case 120 -> spawnExplosionCircle();
+                case 125 -> {
                     if (!this.getWorld().isClient) {
                         spawnExplosions();
                         applyEffectsToUser();
                     }
                 }
-                case 125 -> this.discard();
+                case 135 -> this.discard();
             }
         }
 
@@ -81,7 +81,7 @@ public class ExplosionManagerEntity extends Entity {
     private void spawnPlayerRing() {
         ExplosionRingEntity ring = new ExplosionRingEntity(ModEntities.EXPLOSION_RING, this.getWorld());
         ring.setUser(user, 0.3f);
-        ring.setLifeSpan(115);
+        ring.setLifeSpan(125);
         ring.setPosition(user.getX(), user.getY() + 0.3f, user.getZ());
         this.getWorld().spawnEntity(ring);
     }
@@ -99,15 +99,16 @@ public class ExplosionManagerEntity extends Entity {
     }
 
     private void spawnExplosions() {
+        World world = this.getWorld();
         float explosionDepth = 10;
         float explosionRadius = 1;
 
-        for (int i = 0; i <= 25; ++i) {
-            this.getWorld().createExplosion(user,
+        for (int i = 0; i <= 30; ++i) {
+            world.createExplosion(user,
                     this.getX() + random.nextGaussian() * explosionRadius,
                     this.getY() - explosionDepth,
                     this.getZ() + random.nextGaussian() * explosionRadius,
-                    20, false, World.ExplosionSourceType.MOB
+                    15, false, World.ExplosionSourceType.TNT
             );
 
             if (explosionDepth > 0) explosionDepth -= 0.5f;
