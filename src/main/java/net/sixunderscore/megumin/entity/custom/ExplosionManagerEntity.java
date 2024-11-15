@@ -56,7 +56,7 @@ public class ExplosionManagerEntity extends Entity {
                 case 50 -> spawnRing(30, 40,75);
                 case 115 -> spawnRay();
                 case 120 -> spawnExplosionCircle();
-                case 125 -> {
+                case 121 -> {
                     if (!this.getWorld().isClient) {
                         spawnExplosions();
                         applyEffectsToUser();
@@ -100,29 +100,26 @@ public class ExplosionManagerEntity extends Entity {
 
     private void spawnExplosions() {
         World world = this.getWorld();
-        float explosionDepth = 10;
-        float explosionRadius = 1;
+        float depth = 10;
 
-        for (int i = 0; i <= 30; ++i) {
+        for (int i = 1; i <= 31; ++i) {
             world.createExplosion(user,
-                    this.getX() + random.nextGaussian() * explosionRadius,
-                    this.getY() - explosionDepth,
-                    this.getZ() + random.nextGaussian() * explosionRadius,
-                    15, false, World.ExplosionSourceType.TNT
+                    this.getX() + random.nextBetween(-i, i),
+                    this.getY() - depth,
+                    this.getZ() + random.nextBetween(-i, i),
+                    15, false, World.ExplosionSourceType.BLOCK
             );
 
-            if (explosionDepth > 0) explosionDepth -= 0.5f;
-            explosionRadius += 0.5f;
+            if (depth > 0) depth -= 0.5f;
         }
     }
 
     private void applyEffectsToUser() {
         if (!user.getAbilities().creativeMode) {
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.INSTANT_DAMAGE, 1, 1));
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 400, 1));
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 1200, 2));
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 1200, 3));
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 1200, 2));
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 1600, 2));
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 1600, 3));
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 1600, 2));
         }
     }
 
