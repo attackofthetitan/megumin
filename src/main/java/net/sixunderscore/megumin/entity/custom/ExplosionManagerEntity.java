@@ -1,5 +1,6 @@
 package net.sixunderscore.megumin.entity.custom;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
@@ -11,19 +12,37 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.sixunderscore.megumin.entity.ModEntities;
 
 public class ExplosionManagerEntity extends Entity {
     private static final TrackedData<Integer> TIMER = DataTracker.registerData(ExplosionManagerEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private PlayerEntity user;
+    private int depth;
 
-    public ExplosionManagerEntity(EntityType<?> type, World world) {
-        super(type, world);
+    public ExplosionManagerEntity(EntityType<?> entityType, World world) {
+        super(entityType, world);
     }
 
     public void setUser(PlayerEntity user) {
         this.user = user;
+    }
+
+    // Workaround to have the explosion work properly on superflat worlds
+    private int initializeDepth() {
+        World world = this.getWorld();
+
+        if (!world.isClient) {
+            BlockPos depthChecker = this.getBlockPos();
+
+            for (int i = 0; i <= 10; ++i) {
+                // Check if the block at this position is bedrock
+                if (world.getBlockState(depthChecker.down(i)).isOf(Blocks.BEDROCK)) return i;
+            }
+        }
+
+        return 10;
     }
 
     @Override
@@ -32,12 +51,12 @@ public class ExplosionManagerEntity extends Entity {
     }
 
     @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt) {
+    public void readCustomDataFromNbt(NbtCompound nbt) {
         this.dataTracker.set(TIMER, nbt.getInt("Timer"));
     }
 
     @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt) {
+    public void writeCustomDataToNbt(NbtCompound nbt) {
         nbt.putInt("Timer", this.dataTracker.get(TIMER));
     }
 
@@ -46,6 +65,7 @@ public class ExplosionManagerEntity extends Entity {
         if (user != null) {
             switch (this.dataTracker.get(TIMER)) {
                 case 0 -> {
+                    this.depth = this.initializeDepth();
                     spawnRing(80, 90, 125);
                     spawnPlayerRing();
                 }
@@ -56,13 +76,15 @@ public class ExplosionManagerEntity extends Entity {
                 case 50 -> spawnRing(30, 40,75);
                 case 115 -> spawnRay();
                 case 120 -> spawnExplosionCircle();
-                case 121 -> {
-                    if (!this.getWorld().isClient) {
-                        spawnExplosions();
-                        applyEffectsToUser();
-                    }
+                case 121 -> spawnExplosionRange(1, 6, 20);
+                case 122 -> spawnExplosionRange(6, 12, 15);
+                case 123 -> spawnExplosionRange(12, 18, 15);
+                case 124 -> spawnExplosionRange(18, 24, 15);
+                case 125 -> spawnExplosionRange(24, 30, 15);
+                case 135 -> {
+                    applyEffectsToUser();
+                    this.discard();
                 }
-                case 135 -> this.discard();
             }
         }
 
@@ -83,6 +105,7 @@ public class ExplosionManagerEntity extends Entity {
         ring.setUser(user, 0.3f);
         ring.setLifeSpan(125);
         ring.setPosition(user.getX(), user.getY() + 0.3f, user.getZ());
+
         this.getWorld().spawnEntity(ring);
     }
 
@@ -98,24 +121,37 @@ public class ExplosionManagerEntity extends Entity {
         this.getWorld().spawnEntity(circle);
     }
 
-    private void spawnExplosions() {
+    private void spawnExplosionRange(int startRange, int endRange, int power) {
         World world = this.getWorld();
-        float depth = 10;
 
-        for (int i = 1; i <= 31; ++i) {
-            world.createExplosion(user,
-                    this.getX() + random.nextBetween(-i, i),
-                    this.getY() - depth,
-                    this.getZ() + random.nextBetween(-i, i),
-                    15, false, World.ExplosionSourceType.BLOCK
-            );
+        if (!world.isClient) {
+            for (int i = startRange; i <= endRange; ++i) {
+                int xOffset, zOffset;
 
-            if (depth > 0) depth -= 0.5f;
+                // Set explosion pos near crater radius border
+                if (random.nextBoolean()) {
+                    xOffset = random.nextBoolean() ? -i : i;
+                    zOffset = random.nextBetween(-i, i);
+                } else {
+                    xOffset = random.nextBetween(-i, i);
+                    zOffset = random.nextBoolean() ? -i : i;
+                }
+
+                world.createExplosion(
+                        user,
+                        this.getX() + xOffset,
+                        this.getY() - this.depth,
+                        this.getZ() + zOffset,
+                        power, false, World.ExplosionSourceType.BLOCK
+                );
+            }
         }
+
+        if (this.depth != 0) this.depth -= 2;
     }
 
     private void applyEffectsToUser() {
-        if (!user.getAbilities().creativeMode) {
+        if (!user.getAbilities().creativeMode && !this.getWorld().isClient) {
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 400, 1));
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 1600, 2));
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 1600, 3));
@@ -125,6 +161,11 @@ public class ExplosionManagerEntity extends Entity {
 
     @Override
     public boolean damage(ServerWorld world, DamageSource source, float amount) {
+        return false;
+    }
+
+    @Override
+    public boolean isAttackable() {
         return false;
     }
 }

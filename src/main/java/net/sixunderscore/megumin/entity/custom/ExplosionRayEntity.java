@@ -36,4 +36,9 @@ public class ExplosionRayEntity extends Entity {
     public boolean damage(ServerWorld world, DamageSource source, float amount) {
         return false;
     }
+
+    @Override
+    public boolean isAttackable() {
+        return false;
+    }
 }

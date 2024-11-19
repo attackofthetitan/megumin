@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 public class ExplosionCircleEntity extends Entity {
     public int age;
-    public final int ANIMATION_TICKS = 13;
+    public final int ANIMATION_TICKS = 17;
 
     public ExplosionCircleEntity(EntityType<?> type, World world) {
         super(type, world);
@@ -34,6 +34,11 @@ public class ExplosionCircleEntity extends Entity {
 
     @Override
     public boolean damage(ServerWorld world, DamageSource source, float amount) {
+        return false;
+    }
+
+    @Override
+    public boolean isAttackable() {
         return false;
     }
 }

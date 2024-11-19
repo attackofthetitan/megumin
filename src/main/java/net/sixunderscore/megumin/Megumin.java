@@ -3,6 +3,7 @@ package net.sixunderscore.megumin;
 import net.fabricmc.api.ModInitializer;
 
 import net.sixunderscore.megumin.item.ModItems;
+import net.sixunderscore.megumin.particle.ModParticles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,5 +14,6 @@ public class Megumin implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItems.load();
+		ModParticles.register();
 	}
 }

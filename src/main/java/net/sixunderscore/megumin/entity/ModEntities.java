@@ -10,10 +10,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.sixunderscore.megumin.entity.custom.*;
-import net.sixunderscore.megumin.entity.renderer.ExplosionCircleEntityRenderer;
-import net.sixunderscore.megumin.entity.renderer.ExplosionManagerEntityRenderer;
-import net.sixunderscore.megumin.entity.renderer.ExplosionRayEntityRenderer;
-import net.sixunderscore.megumin.entity.renderer.ExplosionRingEntityRenderer;
+import net.sixunderscore.megumin.entity.renderer.*;
 
 public class ModEntities {
     public static final EntityType<ExplosionRingEntity> EXPLOSION_RING = register("explosion_ring", EntityType.Builder.create(ExplosionRingEntity::new, SpawnGroup.MISC).dropsNothing().dimensions(0.5F, 0.5F));

@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
+import net.sixunderscore.megumin.particle.ModParticles;
 
 public class ExplosionRingEntity extends Entity {
     private static final TrackedData<Float> MAX_SIZE = DataTracker.registerData(ExplosionRingEntity.class, TrackedDataHandlerRegistry.FLOAT);
@@ -43,14 +44,25 @@ public class ExplosionRingEntity extends Entity {
 
     @Override
     public void tick() {
-        //if the entity has reached the end of its lifespan, discard it
+        // If the entity has reached the end of its lifespan, discard it
         if (this.age >= this.dataTracker.get(LIFESPAN)) {
             this.discard();
         }
 
-        //move the ring if it is the player's ring
+        // Move the ring and render star particles if it's the player's ring
         if (user != null) {
             this.setPosition(user.getX(), user.getY() + userYOffset, user.getZ());
+
+            World world = this.getWorld();
+            for (int i = 0; i < 5; ++i) {
+                world.addParticle(
+                        ModParticles.STAR_PARTICLE,
+                        user.getX(),
+                        user.getY(),
+                        user.getZ(),
+                        0,0,0
+                );
+            }
         }
 
         ++this.age;
@@ -81,5 +93,15 @@ public class ExplosionRingEntity extends Entity {
     @Override
     public boolean damage(ServerWorld world, DamageSource source, float amount) {
         return false;
+    }
+
+    @Override
+    public boolean isAttackable() {
+        return false;
+    }
+
+    @Override // To make sure star particles show
+    public boolean shouldRender(double distance) {
+        return true;
     }
 }

@@ -28,7 +28,7 @@ public class MeguminStaffItem extends Item {
 
             BlockHitResult result = world.raycast(new RaycastContext(
                     cameraVec,
-                    cameraVec.add(user.getRotationVec(1.0F).multiply(800)), //max staff reach distance
+                    cameraVec.add(user.getRotationVec(1.0F).multiply(800)),
                     RaycastContext.ShapeType.OUTLINE,
                     RaycastContext.FluidHandling.NONE,
                     user
@@ -48,7 +48,7 @@ public class MeguminStaffItem extends Item {
                     }
                 }
 
-                //set lower cooldown if player in creative
+                // Set lower cooldown if player in creative
                 if (user.getAbilities().creativeMode) {
                     user.getItemCooldownManager().set(stack, 200);
                 } else {
