@@ -57,7 +57,7 @@ public class ExplosionCircleEntityRenderer extends EntityRenderer<ExplosionCircl
         float elapsedTime = entity.age + tickDelta;
         float t = Math.min(elapsedTime / entity.ANIMATION_TICKS, 1.0f);
 
-        state.size = MathHelper.lerp(t, 0, 120);
+        state.size = MathHelper.lerp(t, 0, 110);
     }
 
     @Override
