@@ -30,19 +30,18 @@ public class ExplosionManagerEntity extends Entity {
     }
 
     // Workaround to have the explosion work properly on superflat worlds
-    private int initializeDepth() {
+    private void initializeDepth() {
         World world = this.getWorld();
 
         if (!world.isClient) {
-            BlockPos depthChecker = this.getBlockPos();
+            BlockPos depth = this.getBlockPos();
 
             for (int i = 0; i <= 10; ++i) {
-                // Check if the block at this position is bedrock
-                if (world.getBlockState(depthChecker.down(i)).isOf(Blocks.BEDROCK)) return i;
+                if (world.getBlockState(depth.down(i)).isOf(Blocks.BEDROCK)) this.depth = i;
             }
         }
 
-        return 10;
+        this.depth = 10;
     }
 
     @Override
@@ -65,23 +64,27 @@ public class ExplosionManagerEntity extends Entity {
         if (user != null) {
             switch (this.dataTracker.get(TIMER)) {
                 case 0 -> {
-                    this.depth = this.initializeDepth();
+                    initializeDepth();
                     spawnRing(80, 90, 125);
                     spawnPlayerRing();
                 }
+
                 case 10 -> spawnRing(30, 80,115);
                 case 20 -> spawnRing(40, 70, 105);
                 case 30 -> spawnRing(50, 60, 95);
                 case 40 -> spawnRing(40, 50,85);
                 case 50 -> spawnRing(30, 40,75);
+
                 case 115 -> spawnRay();
                 case 120 -> spawnExplosionCircle();
+
                 case 121 -> spawnExplosionRange(1, 6, 20);
                 case 122 -> spawnExplosionRange(6, 12, 20);
                 case 123 -> spawnExplosionRange(12, 18, 15);
                 case 124 -> spawnExplosionRange(18, 24, 15);
                 case 125 -> spawnExplosionRange(24, 30, 15);
                 case 126 -> spawnExplosionRange(30, 36, 12);
+
                 case 135 -> {
                     applyEffectsToUser();
                     this.discard();
@@ -129,7 +132,7 @@ public class ExplosionManagerEntity extends Entity {
             for (int i = startRange; i <= endRange; ++i) {
                 int xOffset, zOffset;
 
-                // Set explosion pos near crater radius border
+                // Set explosion offset near crater radius border
                 if (random.nextBoolean()) {
                     xOffset = random.nextBoolean() ? -i : i;
                     zOffset = random.nextBetween(-i, i);
