@@ -13,10 +13,12 @@ public class ModParticles {
     public static final SimpleParticleType STAR_PARTICLE = FabricParticleTypes.simple();
 
     public static void register() {
+        Megumin.LOGGER.info("Registering particles for: " + Megumin.MOD_ID);
         Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Megumin.MOD_ID, "star_particle"), STAR_PARTICLE);
     }
 
     public static void registerClient() {
+        Megumin.LOGGER.info("Registering client-side particles for: " + Megumin.MOD_ID);
         ParticleFactoryRegistry.getInstance().register(ModParticles.STAR_PARTICLE, StarParticle.Factory::new);
     }
 }

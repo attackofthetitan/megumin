@@ -9,6 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.sixunderscore.megumin.Megumin;
 import net.sixunderscore.megumin.entity.custom.*;
 import net.sixunderscore.megumin.entity.renderer.*;
 
@@ -27,6 +28,7 @@ public class ModEntities {
     }
 
     public static void registerRenderers() {
+        Megumin.LOGGER.info("Registering renderers for: " + Megumin.MOD_ID);
         EntityRendererRegistry.register(EXPLOSION_RING, ExplosionRingEntityRenderer::new);
         EntityRendererRegistry.register(EXPLOSION_RAY, ExplosionRayEntityRenderer::new);
         EntityRendererRegistry.register(EXPLOSION_CIRCLE, ExplosionCircleEntityRenderer::new);

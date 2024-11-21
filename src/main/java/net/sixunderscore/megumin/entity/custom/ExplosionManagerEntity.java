@@ -77,10 +77,11 @@ public class ExplosionManagerEntity extends Entity {
                 case 115 -> spawnRay();
                 case 120 -> spawnExplosionCircle();
                 case 121 -> spawnExplosionRange(1, 6, 20);
-                case 122 -> spawnExplosionRange(6, 12, 15);
+                case 122 -> spawnExplosionRange(6, 12, 20);
                 case 123 -> spawnExplosionRange(12, 18, 15);
                 case 124 -> spawnExplosionRange(18, 24, 15);
                 case 125 -> spawnExplosionRange(24, 30, 15);
+                case 126 -> spawnExplosionRange(30, 36, 12);
                 case 135 -> {
                     applyEffectsToUser();
                     this.discard();

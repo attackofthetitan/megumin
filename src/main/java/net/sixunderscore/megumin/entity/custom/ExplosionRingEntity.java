@@ -53,14 +53,15 @@ public class ExplosionRingEntity extends Entity {
         if (user != null) {
             this.setPosition(user.getX(), user.getY() + userYOffset, user.getZ());
 
-            World world = this.getWorld();
-            for (int i = 0; i < 5; ++i) {
-                world.addParticle(
+            if (this.getWorld() instanceof ServerWorld serverWorld) {
+                serverWorld.spawnParticles(
                         ModParticles.STAR_PARTICLE,
-                        user.getX(),
+                        user.getX() + random.nextGaussian(),
                         user.getY(),
-                        user.getZ(),
-                        0,0,0
+                        user.getZ() + random.nextGaussian(),
+                        2,
+                        0,0, 0,
+                        1
                 );
             }
         }
@@ -98,10 +99,5 @@ public class ExplosionRingEntity extends Entity {
     @Override
     public boolean isAttackable() {
         return false;
-    }
-
-    @Override // To make sure star particles show
-    public boolean shouldRender(double distance) {
-        return true;
     }
 }
