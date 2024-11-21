@@ -156,9 +156,8 @@ public class ExplosionManagerEntity extends Entity {
 
     private void applyEffectsToUser() {
         if (!user.getAbilities().creativeMode && !this.getWorld().isClient) {
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 400, 1));
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 1600, 2));
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 1600, 3));
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 1600, 2));
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 1600, 2));
         }
     }

@@ -3,10 +3,9 @@
 	"id": "megumin",
 	"version": "${version}",
 	"name": "Megumin",
-	"description": "Adds Megumin's staff from the Anime/Light Novel Konosuba. EXPLOSION!!!",
+	"description": "Adds Megumin's staff from the Anime/Light Novel Konosuba. EXPLOSION!!! \n\nCredit to Atakito for the star particles",
 	"authors": [
-		"6___",
-		"Atakito"
+		"6___"
 	],
 	"contact": {
 		"sources": "https://github.com/sixunderscore/megumin"
