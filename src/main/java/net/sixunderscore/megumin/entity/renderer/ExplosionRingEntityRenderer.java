@@ -82,13 +82,8 @@ public class ExplosionRingEntityRenderer extends EntityRenderer<ExplosionRingEnt
     }
 
     @Override
-    public boolean shouldRender(ExplosionRingEntity entity, Frustum frustum, double x, double y, double z) {
-        //checking if entity is closer to camera than 850 blocks
-        if (entity.squaredDistanceTo(x, y, z) <= 722500) {
-            return true;
-        }
-
-        return super.shouldRender(entity, frustum, x, y, z);
+    public boolean shouldRender(ExplosionRingEntity entity, Frustum frustum, double cameraX, double cameraY, double cameraZ) {
+        return frustum.isVisible(entity.getBoundingBox());
     }
 
     @Override
