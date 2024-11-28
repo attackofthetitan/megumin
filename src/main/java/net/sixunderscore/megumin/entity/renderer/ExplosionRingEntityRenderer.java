@@ -8,6 +8,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.sixunderscore.megumin.Megumin;
 import net.sixunderscore.megumin.entity.custom.ExplosionRingEntity;
@@ -82,8 +83,13 @@ public class ExplosionRingEntityRenderer extends EntityRenderer<ExplosionRingEnt
     }
 
     @Override
-    public boolean shouldRender(ExplosionRingEntity entity, Frustum frustum, double cameraX, double cameraY, double cameraZ) {
-        return frustum.isVisible(entity.getBoundingBox());
+    public boolean shouldRender(ExplosionRingEntity entity, Frustum frustum, double x, double y, double z) {
+        Box box = this.getBoundingBox(entity).expand(0.5);
+        if (box.isNaN() || box.getAverageSideLength() == 0.0) {
+            box = new Box(entity.getX() - 2.0, entity.getY() - 2.0, entity.getZ() - 2.0, entity.getX() + 2.0, entity.getY() + 2.0, entity.getZ() + 2.0);
+        }
+
+        return frustum.isVisible(box);
     }
 
     @Override
