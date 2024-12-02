@@ -24,20 +24,20 @@ public class ExplosionCircleEntityRenderer extends EntityRenderer<ExplosionCircl
     public void render(SimpleExplosionVisualRenderState state, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
         matrixStack.push();
 
-        //multiply rotation by player's position and scale to size
+        // Multiply rotation by player's position and scale to size
         float size = state.size;
         matrixStack.scale(size, size, size);
         matrixStack.multiply(this.dispatcher.getRotation());
 
-        //prepare to render the vertices
+        // Prepare to render the vertices
         MatrixStack.Entry entry = matrixStack.peek();
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(LAYER);
 
-        //render vertices
+        // Render vertices
         produceVertex(vertexConsumer, entry, -0.5F, -0.5F, 0, 1);
-        produceVertex(vertexConsumer, entry, -0.5F, 0.5F,1, 1);
+        produceVertex(vertexConsumer, entry, -0.5F, 0.5F, 1, 1);
         produceVertex(vertexConsumer, entry, 0.5F, 0.5F, 1, 0);
-        produceVertex(vertexConsumer, entry, 0.5F, -0.5F,0, 0);
+        produceVertex(vertexConsumer, entry, 0.5F, -0.5F, 0, 0);
 
         matrixStack.pop();
         super.render(state, matrixStack, vertexConsumerProvider, light);
@@ -56,9 +56,9 @@ public class ExplosionCircleEntityRenderer extends EntityRenderer<ExplosionCircl
     public void updateRenderState(ExplosionCircleEntity entity, SimpleExplosionVisualRenderState state, float tickDelta) {
         super.updateRenderState(entity, state, tickDelta);
         float elapsedTime = entity.age + tickDelta;
-        float t = Math.min(elapsedTime / entity.ANIMATION_TICKS, 1.0f);
+        float delta = Math.min(elapsedTime / entity.ANIMATION_TICKS, 1.0f);
 
-        state.size = MathHelper.lerp(t, 0, 110);
+        state.size = MathHelper.lerp(delta, 0, 125);
     }
 
     @Override

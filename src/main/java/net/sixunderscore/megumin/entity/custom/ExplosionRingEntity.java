@@ -60,7 +60,7 @@ public class ExplosionRingEntity extends Entity {
                         user.getY(),
                         user.getZ() + random.nextGaussian(),
                         2,
-                        0,0, 0,
+                        0, 0, 0,
                         1
                 );
             }

@@ -1,0 +1,18 @@
+{
+  "big_explosion": {
+    "sounds": [
+      "megumin:big_explosion"
+    ]
+  },
+  "magic_ring": {
+    "sounds": [
+      "megumin:magic_ring"
+    ]
+  },
+  "magic_ambient": {
+    "sounds": [
+      "megumin:magic_ambient"
+    ]
+  }
+}
+

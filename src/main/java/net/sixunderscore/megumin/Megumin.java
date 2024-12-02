@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.sixunderscore.megumin.item.ModItems;
 import net.sixunderscore.megumin.particle.ModParticles;
+import net.sixunderscore.megumin.sound.ModSounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,5 +16,6 @@ public class Megumin implements ModInitializer {
 	public void onInitialize() {
 		ModItems.load();
 		ModParticles.register();
+		ModSounds.register();
 	}
 }

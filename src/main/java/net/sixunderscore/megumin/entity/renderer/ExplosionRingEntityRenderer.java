@@ -27,21 +27,20 @@ public class ExplosionRingEntityRenderer extends EntityRenderer<ExplosionRingEnt
     @Override
     public void render(ExplosionRingEntityRenderState state, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
         matrixStack.push();
-
-        //scale and rotate by the entity's provided size and rotation
+        // Scale and rotate by the entity's provided size and rotation
         float size = state.size;
         matrixStack.scale(size, size, size);
         matrixStack.multiply(new Quaternionf().rotateY(state.rotation));
 
-        //prepare to render the vertices
+        // Prepare to render the vertices
         MatrixStack.Entry entry = matrixStack.peek();
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(LAYER);
 
-        //render vertices
+        // Render vertices
         produceVertex(vertexConsumer, entry, -0.5F, -0.5F, 0, 1);
-        produceVertex(vertexConsumer, entry, -0.5F, 0.5F,1, 1);
+        produceVertex(vertexConsumer, entry, -0.5F, 0.5F, 1, 1);
         produceVertex(vertexConsumer, entry, 0.5F, 0.5F, 1, 0);
-        produceVertex(vertexConsumer, entry, 0.5F, -0.5F,0, 0);
+        produceVertex(vertexConsumer, entry, 0.5F, -0.5F, 0, 0);
 
         matrixStack.pop();
         super.render(state, matrixStack, vertexConsumerProvider, light);
@@ -64,14 +63,14 @@ public class ExplosionRingEntityRenderer extends EntityRenderer<ExplosionRingEnt
         float animationTicks = (float) entity.ANIMATION_TICKS;
 
         if (entity.age < animationTicks) {
-            //growing phase
-            float elapsedTime = (entity.age + tickDelta); //time since growth started
+            // Growing phase
+            float elapsedTime = (entity.age + tickDelta); // Time since growth started
             float delta = Math.min(elapsedTime / animationTicks, 1.0f);
 
             state.size = MathHelper.lerp(delta, 0, maxSize);
         } else if (entity.age > entityLifeSpan - animationTicks) {
-            //shrinking phase
-            float elapsedTime = (entity.age + tickDelta) - (entityLifeSpan - animationTicks); //time since shrink started
+            // Shrinking phase
+            float elapsedTime = (entity.age + tickDelta) - (entityLifeSpan - animationTicks); // Time since shrink started
             float delta = Math.min(elapsedTime / animationTicks, 1.0f);
 
             state.size = MathHelper.lerp(delta, maxSize, 0);

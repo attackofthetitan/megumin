@@ -25,17 +25,17 @@ public class ExplosionRayEntityRenderer extends EntityRenderer<ExplosionRayEntit
     public void render(SimpleExplosionVisualRenderState state, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
         matrixStack.push();
 
-        //multiply y-axis by player's position
+        // Multiply y-axis by player's position
         Quaternionf playerQuaternion = this.dispatcher.getRotation();
         playerQuaternion.x = 0;
         playerQuaternion.z = 0;
         matrixStack.multiply(playerQuaternion);
 
-        //prepare to render the vertices
+        // Prepare to render the vertices
         MatrixStack.Entry entry = matrixStack.peek();
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(LAYER);
 
-        //render vertices
+        // Render vertices
         float size = state.size;
         produceVertex(vertexConsumer, entry, -1.5F, size, 0, 1);
         produceVertex(vertexConsumer, entry, 1.5F, size, 1, 1);
@@ -59,9 +59,9 @@ public class ExplosionRayEntityRenderer extends EntityRenderer<ExplosionRayEntit
     public void updateRenderState(ExplosionRayEntity entity, SimpleExplosionVisualRenderState state, float tickDelta) {
         super.updateRenderState(entity, state, tickDelta);
         float elapsedTime = entity.age + tickDelta;
-        float t = Math.min(elapsedTime / entity.ANIMATION_TICKS, 1.0f);
+        float delta = Math.min(elapsedTime / entity.ANIMATION_TICKS, 1.0f);
 
-        state.size = MathHelper.lerp(t, 0, -100);
+        state.size = MathHelper.lerp(delta, 0, -100);
     }
 
     @Override
