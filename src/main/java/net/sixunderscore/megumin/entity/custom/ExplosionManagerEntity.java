@@ -64,7 +64,7 @@ public class ExplosionManagerEntity extends Entity {
                 case 70 -> spawnRing(30, 40,80);
 
                 case 140 -> spawnRay();
-                case 145 -> spawnExplosionCircle();
+                case 145 -> spawnExplosionBlast();
 
                 case 146 -> spawnExplosionRange(1, 6, 20);
                 case 147 -> spawnExplosionRange(6, 12, 20);
@@ -163,11 +163,11 @@ public class ExplosionManagerEntity extends Entity {
         this.getWorld().spawnEntity(ray);
     }
 
-    private void spawnExplosionCircle() {
-        ExplosionCircleEntity circle = new ExplosionCircleEntity(ModEntities.EXPLOSION_CIRCLE, this.getWorld());
-        circle.setPosition(this.getX(), this.getY(), this.getZ());
+    private void spawnExplosionBlast() {
+        ExplosionBlastEntity blast = new ExplosionBlastEntity(ModEntities.EXPLOSION_BLAST, this.getWorld());
+        blast.setPosition(this.getX(), this.getY(), this.getZ());
 
-        this.getWorld().spawnEntity(circle);
+        this.getWorld().spawnEntity(blast);
 
         if (!this.getWorld().isClient) { // Play explosion sound effect
             this.getWorld().playSound(

@@ -8,11 +8,11 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
-public class ExplosionCircleEntity extends Entity {
+public class ExplosionBlastEntity extends Entity {
     public int age;
     public final int ANIMATION_TICKS = 20;
 
-    public ExplosionCircleEntity(EntityType<?> type, World world) {
+    public ExplosionBlastEntity(EntityType<?> type, World world) {
         super(type, world);
     }
 

@@ -8,14 +8,14 @@ import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.sixunderscore.megumin.Megumin;
-import net.sixunderscore.megumin.entity.custom.ExplosionCircleEntity;
+import net.sixunderscore.megumin.entity.custom.ExplosionBlastEntity;
 import net.sixunderscore.megumin.entity.renderstates.SimpleExplosionVisualRenderState;
 
-public class ExplosionCircleEntityRenderer extends EntityRenderer<ExplosionCircleEntity, SimpleExplosionVisualRenderState> {
+public class ExplosionBlastEntityRenderer extends EntityRenderer<ExplosionBlastEntity, SimpleExplosionVisualRenderState> {
     private static final Identifier TEXTURE = Identifier.of(Megumin.MOD_ID, "textures/entity/explosion_circle.png");
     private static final RenderLayer LAYER = RenderLayer.getEntityTranslucent(TEXTURE);
 
-    public ExplosionCircleEntityRenderer(EntityRendererFactory.Context ctx) {
+    public ExplosionBlastEntityRenderer(EntityRendererFactory.Context ctx) {
         super(ctx);
     }
 
@@ -52,7 +52,7 @@ public class ExplosionCircleEntityRenderer extends EntityRenderer<ExplosionCircl
     }
 
     @Override
-    public void updateRenderState(ExplosionCircleEntity entity, SimpleExplosionVisualRenderState state, float tickDelta) {
+    public void updateRenderState(ExplosionBlastEntity entity, SimpleExplosionVisualRenderState state, float tickDelta) {
         super.updateRenderState(entity, state, tickDelta);
         float elapsedTime = entity.age + tickDelta;
         float delta = Math.min(elapsedTime / entity.ANIMATION_TICKS, 1.0f);
@@ -61,7 +61,7 @@ public class ExplosionCircleEntityRenderer extends EntityRenderer<ExplosionCircl
     }
 
     @Override
-    public boolean shouldRender(ExplosionCircleEntity entity, Frustum frustum, double x, double y, double z) {
+    public boolean shouldRender(ExplosionBlastEntity entity, Frustum frustum, double x, double y, double z) {
         return frustum.isVisible(this.getBoundingBox(entity).expand(125));
     }
 
