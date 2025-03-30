@@ -38,7 +38,7 @@ public class ExplosionManagerEntity extends Entity {
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
-        this.dataTracker.set(TIMER, nbt.getInt("Timer"));
+        this.dataTracker.set(TIMER, nbt.getInt("Timer", 1));
     }
 
     @Override

@@ -39,7 +39,6 @@ public class ExplosionBlastEntityRenderer extends EntityRenderer<ExplosionBlastE
         produceVertex(vertexConsumer, entry, 0.5F, -0.5F, 0, 0);
 
         matrixStack.pop();
-        super.render(state, matrixStack, vertexConsumerProvider, light);
     }
 
     private void produceVertex(VertexConsumer vertexConsumer, MatrixStack.Entry matrix, float x, float y, int textureU, int textureV) {

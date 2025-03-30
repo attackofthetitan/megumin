@@ -42,7 +42,6 @@ public class ExplosionRayEntityRenderer extends EntityRenderer<ExplosionRayEntit
         produceVertex(vertexConsumer, entry, -1.5F, 0, 0, 0);
 
         matrixStack.pop();
-        super.render(state, matrixStack, vertexConsumerProvider, light);
     }
 
     private void produceVertex(VertexConsumer vertexConsumer, MatrixStack.Entry matrix, float x, float y, int textureU, int textureV) {

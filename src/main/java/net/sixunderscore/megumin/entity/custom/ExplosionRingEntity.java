@@ -38,8 +38,8 @@ public class ExplosionRingEntity extends Entity {
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
-        this.dataTracker.set(MAX_SIZE, nbt.getFloat("MaxSize"));
-        this.dataTracker.set(LIFESPAN, nbt.getFloat("LifeSpan"));
+        this.dataTracker.set(MAX_SIZE, nbt.getFloat("MaxSize", 1.0f));
+        this.dataTracker.set(LIFESPAN, nbt.getFloat("LifeSpan", 1.0f));
     }
 
     @Override
