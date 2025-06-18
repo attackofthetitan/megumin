@@ -11,6 +11,7 @@ public class ModSounds {
     public static SoundEvent MAGIC_RING = SoundEvent.of(Identifier.of(Megumin.MOD_ID,"magic_ring"));
     public static SoundEvent MAGIC_AMBIENT = SoundEvent.of(Identifier.of(Megumin.MOD_ID,"magic_ambient"));
     public static SoundEvent MAGIC_CHANT = SoundEvent.of(Identifier.of(Megumin.MOD_ID, "magic_chant"));
+
     public static void register() {
         Megumin.LOGGER.info("Registering sounds for: " + Megumin.MOD_ID);
         Registry.register(Registries.SOUND_EVENT, Identifier.of(Megumin.MOD_ID, "big_explosion"), BIG_EXPLOSION);

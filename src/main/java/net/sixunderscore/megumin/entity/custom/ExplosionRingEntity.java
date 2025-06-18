@@ -7,7 +7,6 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
-//import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
@@ -33,23 +32,17 @@ public class ExplosionRingEntity extends Entity {
     }
 
     @Override
-    public void writeCustomData(WriteView view){}
-
-    @Override
-    protected void readCustomData(ReadView view){}
-    /*
-    @Override
-    public void writeCustomDataToNBT(NbtCompound nbt) {
-        nbt.putFloat("MaxSize", this.dataTracker.get(MAX_SIZE));
-        nbt.putFloat("LifeSpan", this.dataTracker.get(LIFESPAN));
+    public void writeCustomData(WriteView view){
+        view.putFloat("MaxSize", this.dataTracker.get(MAX_SIZE));
+        view.putFloat("LifeSpan", this.dataTracker.get(LIFESPAN));
     }
 
     @Override
-    public void readCustomDataFromNBT(NbtCompound nbt) {
-        this.dataTracker.set(MAX_SIZE, nbt.getFloat("MaxSize", 1.0f));
-        this.dataTracker.set(LIFESPAN, nbt.getFloat("LifeSpan", 1.0f));
+    protected void readCustomData(ReadView view){
+        this.dataTracker.set(MAX_SIZE, view.getFloat("MaxSize", 1.0f));
+        this.dataTracker.set(LIFESPAN, view.getFloat("LifeSpan", 1.0f));
     }
-    */
+
     @Override
     public void tick() {
         // If the entity has reached the end of its lifespan, discard it

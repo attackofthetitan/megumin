@@ -10,7 +10,6 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-//import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.storage.ReadView;
@@ -39,21 +38,15 @@ public class ExplosionManagerEntity extends Entity {
     }
 
     @Override
-    protected void writeCustomData(WriteView view){}
-
-    @Override
-    protected void readCustomData(ReadView view){}
-    /*
-    @Override
-    public void readCustomDataFromNBT(NbtCompound nbt) {
-        this.dataTracker.set(TIMER, nbt.getInt("Timer", 1));
+    protected void writeCustomData(WriteView view){
+        view.putInt("Timer", this.dataTracker.get(TIMER));
     }
 
     @Override
-    public void writeCustomDataToNBT(NbtCompound nbt) {
-        nbt.putInt("Timer", this.dataTracker.get(TIMER));
+    protected void readCustomData(ReadView view){
+        this.dataTracker.set(TIMER, view.getInt("Timer", 1));
     }
-    */
+
     @Override
     public void tick() {
         if (user != null) {
@@ -250,8 +243,4 @@ public class ExplosionManagerEntity extends Entity {
         return false;
     }
 
-    @Override
-    public boolean isAttackable() {
-        return false;
-    }
 }

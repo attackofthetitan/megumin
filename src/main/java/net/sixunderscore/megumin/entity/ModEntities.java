@@ -7,29 +7,40 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.sixunderscore.megumin.Megumin;
 import net.sixunderscore.megumin.entity.custom.*;
 import net.sixunderscore.megumin.entity.renderer.*;
 
 public class ModEntities {
-    public static final EntityType<ExplosionRingEntity> EXPLOSION_RING = register("explosion_ring", EntityType.Builder.create(ExplosionRingEntity::new, SpawnGroup.MISC)
-            .dropsNothing().dimensions(0.5F, 0.5F));
-    public static final EntityType<ExplosionRayEntity> EXPLOSION_RAY = register("explosion_ray", EntityType.Builder.create(ExplosionRayEntity::new, SpawnGroup.MISC)
-            .dropsNothing().dimensions(0.5F, 0.5F));
-    public static final EntityType<ExplosionBlastEntity> EXPLOSION_BLAST = register("explosion_blast", EntityType.Builder.create(ExplosionBlastEntity::new, SpawnGroup.MISC)
-            .dropsNothing().dimensions(0.5F, 0.5F));
-    public static final EntityType<ExplosionManagerEntity> EXPLOSION_MANAGER = register("explosion_manager", EntityType.Builder.create(ExplosionManagerEntity::new, SpawnGroup.MISC)
-            .dropsNothing().dimensions(0.5F, 0.5F));
+    public static final EntityType<ExplosionRingEntity> EXPLOSION_RING = register(
+            "explosion_ring", ExplosionRingEntity::new
+    );
 
-    private static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> type) {
-        return register(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.ofVanilla(id)), type);
+    public static final EntityType<ExplosionRayEntity> EXPLOSION_RAY = register(
+            "explosion_ray", ExplosionRayEntity::new
+    );
+
+    public static final EntityType<ExplosionBlastEntity> EXPLOSION_BLAST = register(
+            "explosion_blast", ExplosionBlastEntity::new
+    );
+
+    public static final EntityType<ExplosionManagerEntity> EXPLOSION_MANAGER = register(
+            "explosion_manager", ExplosionManagerEntity::new
+    );
+
+    private static <T extends Entity> EntityType<T> register(String id, EntityType.EntityFactory<T> factory){
+        return Registry.register(
+                Registries.ENTITY_TYPE,
+                Identifier.of(Megumin.MOD_ID, id),
+                EntityType.Builder.create(factory, SpawnGroup.MISC)
+                        .dropsNothing()
+                        .dimensions(0.5F, 0.5F)
+                        .build(RegistryKey.of(Registries.ENTITY_TYPE.getKey(), Identifier.of(Megumin.MOD_ID, id)))
+        );
     }
 
-    private static <T extends Entity> EntityType<T> register(RegistryKey<EntityType<?>> key, EntityType.Builder<T> type) {
-        return Registry.register(Registries.ENTITY_TYPE, key, type.build(key));
-    }
+
 
     public static void registerRenderers() {
         Megumin.LOGGER.info("Registering renderers for: " + Megumin.MOD_ID);
