@@ -13,6 +13,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.sixunderscore.megumin.entity.ModEntities;
@@ -37,15 +39,21 @@ public class ExplosionManagerEntity extends Entity {
     }
 
     @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
+    protected void writeCustomData(WriteView view){}
+
+    @Override
+    protected void readCustomData(ReadView view){}
+    /*
+    @Override
+    public void readCustomDataFromNBT(NbtCompound nbt) {
         this.dataTracker.set(TIMER, nbt.getInt("Timer", 1));
     }
 
     @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
+    public void writeCustomDataToNBT(NbtCompound nbt) {
         nbt.putInt("Timer", this.dataTracker.get(TIMER));
     }
-
+    */
     @Override
     public void tick() {
         if (user != null) {
