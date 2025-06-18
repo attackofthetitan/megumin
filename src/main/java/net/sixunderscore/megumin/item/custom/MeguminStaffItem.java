@@ -52,7 +52,7 @@ public class MeguminStaffItem extends Item {
                 if (user.getAbilities().creativeMode) {
                     user.getItemCooldownManager().set(stack, 200);
                 } else {
-                    user.getItemCooldownManager().set(stack, 1200);
+                    user.getItemCooldownManager().set(stack, 24000);
                 }
                 return ActionResult.SUCCESS;
             }
