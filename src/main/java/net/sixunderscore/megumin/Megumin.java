@@ -2,6 +2,7 @@ package net.sixunderscore.megumin;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.sixunderscore.megumin.entity.ModEntities;
 import net.sixunderscore.megumin.item.ModItems;
 import net.sixunderscore.megumin.particle.ModParticles;
 import net.sixunderscore.megumin.sound.ModSounds;
@@ -15,6 +16,7 @@ public class Megumin implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItems.load();
+		ModEntities.registerModEntities();
 		ModParticles.register();
 		ModSounds.register();
 	}

@@ -59,28 +59,26 @@ public class ExplosionManagerEntity extends Entity {
                     spawnPlayerRing();
                 }
 
-                case 40 -> spawnRing(80, 90, 650);
-                case 80 -> spawnRing(30, 80,610);
-                case 120 -> spawnRing(40, 70, 570);
-                case 160 -> spawnRing(50, 60, 530);
-                case 200 -> spawnRing(40, 50,490);
-                case 240 -> spawnRing(30, 40,450);
+                case 40 -> spawnRing(80, 90, 660);
+                case 80 -> spawnRing(30, 80,620);
+                case 120 -> spawnRing(40, 70, 580);
+                case 160 -> spawnRing(50, 60, 540);
+                case 200 -> spawnRing(40, 50,500);
+                case 240 -> spawnRing(30, 40,460);
 
-                case 683 -> spawnRay();
-                case 690 -> spawnExplosionBlast();
+                case 700 -> spawnRay();
+                case 705 -> spawnExplosionBlast();
 
-                case 691 -> spawnExplosionRange(1, 6, 30);
-                case 692 -> spawnExplosionRange(6, 12, 30);
-                case 693 -> spawnExplosionRange(12, 18, 25);
-                case 694 -> spawnExplosionRange(18, 24, 25);
-                case 695 -> spawnExplosionRange(24, 30, 25);
-                case 696 -> spawnExplosionRange(30, 36, 20);
-                case 697 -> spawnExplosionRange(36, 42, 15);
+                case 706 -> spawnExplosionRange(1, 6, 30);
+                case 707 -> spawnExplosionRange(6, 12, 30);
+                case 708 -> spawnExplosionRange(12, 18, 25);
+                case 709 -> spawnExplosionRange(18, 24, 25);
+                case 710 -> spawnExplosionRange(24, 30, 20);
+                case 711 -> spawnExplosionRange(30, 36, 15);
 
-                case 705 -> {
-                    applyEffectsToUser();
-                    this.discard();
-                }
+                case 715 -> applyEffectsToUser();
+
+                case 720 -> this.discard();
             }
 
             this.dataTracker.set(TIMER, this.dataTracker.get(TIMER) + 1);
@@ -109,7 +107,7 @@ public class ExplosionManagerEntity extends Entity {
 
     private void castEffect() {
         if (!user.getAbilities().creativeMode && !this.getWorld().isClient) {
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 705, 7));
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 720, 9));
         }
     }
     private void playAmbientSound() {
@@ -139,7 +137,7 @@ public class ExplosionManagerEntity extends Entity {
     private void spawnPlayerRing() {
         ExplosionRingEntity ring = new ExplosionRingEntity(ModEntities.EXPLOSION_RING, this.getWorld());
         ring.setUser(user, 0.3f);
-        ring.setLifeSpan(695);
+        ring.setLifeSpan(700);
         ring.setPosition(user.getX(), user.getY() + 0.3f, user.getZ());
 
         this.getWorld().spawnEntity(ring);
