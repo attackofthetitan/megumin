@@ -1,4 +1,4 @@
-package net.sixunderscore.megumin.entity.renderer;
+package net.attackofthetitan.megumin.entity.renderer;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -9,9 +9,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.sixunderscore.megumin.Megumin;
-import net.sixunderscore.megumin.entity.custom.ExplosionRingEntity;
-import net.sixunderscore.megumin.entity.renderstates.ExplosionRingEntityRenderState;
+import net.attackofthetitan.megumin.Megumin;
+import net.attackofthetitan.megumin.entity.custom.ExplosionRingEntity;
+import net.attackofthetitan.megumin.entity.renderstates.ExplosionRingEntityRenderState;
 import org.joml.Quaternionf;
 
 @Environment(EnvType.CLIENT)

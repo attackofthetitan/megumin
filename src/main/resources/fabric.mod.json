@@ -15,10 +15,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.sixunderscore.megumin.Megumin"
+          "net.attackofthetitan.megumin.Megumin"
 		],
 		"client": [
-			"net.sixunderscore.megumin.MeguminClient"
+          "net.attackofthetitan.megumin.MeguminClient"
 		]
 	},
 	"depends": {

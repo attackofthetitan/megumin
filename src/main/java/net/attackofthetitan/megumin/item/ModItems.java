@@ -1,4 +1,4 @@
-package net.sixunderscore.megumin.item;
+package net.attackofthetitan.megumin.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
@@ -7,8 +7,8 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import net.sixunderscore.megumin.Megumin;
-import net.sixunderscore.megumin.item.custom.MeguminStaffItem;
+import net.attackofthetitan.megumin.Megumin;
+import net.attackofthetitan.megumin.item.custom.MeguminStaffItem;
 
 import java.util.function.Function;
 

@@ -1,11 +1,11 @@
-package net.sixunderscore.megumin;
+package net.attackofthetitan.megumin;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.sixunderscore.megumin.entity.ModEntities;
-import net.sixunderscore.megumin.item.ModItems;
-import net.sixunderscore.megumin.particle.ModParticles;
-import net.sixunderscore.megumin.sound.ModSounds;
+import net.attackofthetitan.megumin.entity.ModEntities;
+import net.attackofthetitan.megumin.item.ModItems;
+import net.attackofthetitan.megumin.particle.ModParticles;
+import net.attackofthetitan.megumin.sound.ModSounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

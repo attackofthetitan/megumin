@@ -1,4 +1,4 @@
-package net.sixunderscore.megumin.entity.custom;
+package net.attackofthetitan.megumin.entity.custom;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -16,8 +16,8 @@ import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.sixunderscore.megumin.entity.ModEntities;
-import net.sixunderscore.megumin.sound.ModSounds;
+import net.attackofthetitan.megumin.entity.ModEntities;
+import net.attackofthetitan.megumin.sound.ModSounds;
 
 public class ExplosionManagerEntity extends Entity {
     private static final TrackedData<Integer> TIMER = DataTracker.registerData(ExplosionManagerEntity.class, TrackedDataHandlerRegistry.INTEGER);

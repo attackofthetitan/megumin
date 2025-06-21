@@ -1,4 +1,4 @@
-package net.sixunderscore.megumin.item.custom;
+package net.attackofthetitan.megumin.item.custom;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,8 +11,8 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
-import net.sixunderscore.megumin.entity.ModEntities;
-import net.sixunderscore.megumin.entity.custom.ExplosionManagerEntity;
+import net.attackofthetitan.megumin.entity.ModEntities;
+import net.attackofthetitan.megumin.entity.custom.ExplosionManagerEntity;
 
 public class MeguminStaffItem extends Item {
     public MeguminStaffItem(Settings settings) {

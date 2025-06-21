@@ -1,4 +1,4 @@
-package net.sixunderscore.megumin.entity.custom;
+package net.attackofthetitan.megumin.entity.custom;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

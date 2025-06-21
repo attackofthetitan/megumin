@@ -1,10 +1,10 @@
-package net.sixunderscore.megumin.sound;
+package net.attackofthetitan.megumin.sound;
 
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.sixunderscore.megumin.Megumin;
+import net.attackofthetitan.megumin.Megumin;
 
 public class ModSounds {
     public static SoundEvent BIG_EXPLOSION = SoundEvent.of(Identifier.of(Megumin.MOD_ID,"big_explosion"));

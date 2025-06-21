@@ -1,4 +1,4 @@
-package net.sixunderscore.megumin.entity.custom;
+package net.attackofthetitan.megumin.entity.custom;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -11,7 +11,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.world.World;
-import net.sixunderscore.megumin.particle.ModParticles;
+import net.attackofthetitan.megumin.particle.ModParticles;
 
 public class ExplosionRingEntity extends Entity {
     private static final TrackedData<Float> MAX_SIZE = DataTracker.registerData(ExplosionRingEntity.class, TrackedDataHandlerRegistry.FLOAT);

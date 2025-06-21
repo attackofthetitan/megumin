@@ -1,5 +1,13 @@
-package net.sixunderscore.megumin.entity;
+package net.attackofthetitan.megumin.entity;
 
+import net.attackofthetitan.megumin.entity.custom.ExplosionBlastEntity;
+import net.attackofthetitan.megumin.entity.custom.ExplosionManagerEntity;
+import net.attackofthetitan.megumin.entity.custom.ExplosionRayEntity;
+import net.attackofthetitan.megumin.entity.custom.ExplosionRingEntity;
+import net.attackofthetitan.megumin.entity.renderer.ExplosionBlastEntityRenderer;
+import net.attackofthetitan.megumin.entity.renderer.ExplosionManagerEntityRenderer;
+import net.attackofthetitan.megumin.entity.renderer.ExplosionRayEntityRenderer;
+import net.attackofthetitan.megumin.entity.renderer.ExplosionRingEntityRenderer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -9,9 +17,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import net.sixunderscore.megumin.Megumin;
-import net.sixunderscore.megumin.entity.custom.*;
-import net.sixunderscore.megumin.entity.renderer.*;
+import net.attackofthetitan.megumin.Megumin;
 
 public class ModEntities {
     public static final EntityType<ExplosionRingEntity> EXPLOSION_RING = register("explosion_ring", ExplosionRingEntity::new);

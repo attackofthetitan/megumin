@@ -1,4 +1,4 @@
-package net.sixunderscore.megumin.particle.custom;
+package net.attackofthetitan.megumin.particle.custom;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

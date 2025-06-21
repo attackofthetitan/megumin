@@ -1,4 +1,4 @@
-package net.sixunderscore.megumin.entity.renderstates;
+package net.attackofthetitan.megumin.entity.renderstates;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
