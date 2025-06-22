@@ -13,7 +13,7 @@ import net.attackofthetitan.megumin.item.custom.MeguminStaffItem;
 import java.util.function.Function;
 
 public class ModItems {
-    public static final Item MEGUMIN_STAFF_ITEM = registerItem("megumin_staff", MeguminStaffItem::new, new Item.Settings().maxCount(1).maxDamage(20));
+    public static final Item MEGUMIN_STAFF_ITEM = registerItem("megumin_staff", MeguminStaffItem::new, new Item.Settings().maxCount(1));
     public static final Item STAFF_BALL = registerItem("staff_ball", Item::new, new Item.Settings());
 
     public static Item registerItem(String path, Function<Item.Settings, Item> factory, Item.Settings settings) {

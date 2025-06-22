@@ -1,6 +1,5 @@
 package net.attackofthetitan.megumin.item.custom;
 
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -42,15 +41,11 @@ public class MeguminStaffItem extends Item {
                     explosionManager.setUser(user);
                     explosionManager.setPosition(hitPos);
                     world.spawnEntity(explosionManager);
-
-                    if (!user.getAbilities().creativeMode) {
-                        stack.damage(1, user, EquipmentSlot.MAINHAND);
-                    }
                 }
 
                 // Set lower cooldown if player in creative
                 if (user.getAbilities().creativeMode) {
-                    user.getItemCooldownManager().set(stack, 200);
+                    user.getItemCooldownManager().set(stack, 720);
                 } else {
                     user.getItemCooldownManager().set(stack, 24000);
                 }

@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import net.attackofthetitan.megumin.entity.ModEntities;
 import net.attackofthetitan.megumin.sound.ModSounds;
 
+
 public class ExplosionManagerEntity extends Entity {
     private static final TrackedData<Integer> TIMER = DataTracker.registerData(ExplosionManagerEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private PlayerEntity user;
@@ -78,7 +79,10 @@ public class ExplosionManagerEntity extends Entity {
 
                 case 715 -> applyEffectsToUser();
 
-                case 720 -> this.discard();
+                case 720 -> {
+                    ModEntities.setFreezePlayer(true);
+                    this.discard();
+                }
             }
 
             this.dataTracker.set(TIMER, this.dataTracker.get(TIMER) + 1);
@@ -107,7 +111,7 @@ public class ExplosionManagerEntity extends Entity {
 
     private void castEffect() {
         if (!user.getAbilities().creativeMode && !this.getWorld().isClient) {
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 720, 9));
+            ModEntities.setFreezePlayer(false);
         }
     }
     private void playAmbientSound() {
@@ -137,7 +141,7 @@ public class ExplosionManagerEntity extends Entity {
     private void spawnPlayerRing() {
         ExplosionRingEntity ring = new ExplosionRingEntity(ModEntities.EXPLOSION_RING, this.getWorld());
         ring.setUser(user, 0.3f);
-        ring.setLifeSpan(700);
+        ring.setLifeSpan(720);
         ring.setPosition(user.getX(), user.getY() + 0.3f, user.getZ());
 
         this.getWorld().spawnEntity(ring);
@@ -230,7 +234,7 @@ public class ExplosionManagerEntity extends Entity {
 
     private void applyEffectsToUser() {
         if (!user.getAbilities().creativeMode && !this.getWorld().isClient) {
-            user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 24000, 4));
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 24000, 2));
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 24000, 2));
             user.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 24000, 2));
         }
